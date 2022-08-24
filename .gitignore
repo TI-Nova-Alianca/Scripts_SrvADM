@@ -1,0 +1,7 @@
+# Lista de arquivos a serem ignorados para controle de versionamento pelo GIT
+
+*.zip
+.Logs/*.*
+.vscode/launch.json
+.vscode/settings.json
+*.vscode
