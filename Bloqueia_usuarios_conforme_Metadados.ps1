@@ -14,7 +14,7 @@
 # 12/11/2020 - Robert - Passa a aceitar 'CPF' e 'Pessoa' como chaves no EmployeeID
 #
 
-dica: https://fluig.totvsrs.com.br/portal/1/inscricao-evento?e=934
+#dica: https://fluig.totvsrs.com.br/portal/1/inscricao-evento?e=934
 
 # Importa arquivos de funcoes via 'dot source' para que as funcoes possam ser usadas aqui.
 . C:\util\Scripts\Function_Grava-Log.ps1

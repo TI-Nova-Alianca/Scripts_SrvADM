@@ -5,10 +5,16 @@
 # Historico de alteracoes:
 
 # Importa arquivos de funcoes via 'dot source' para que as funcoes possam ser usadas aqui.
-. C:\util\Scripts\Function_Grava-Log.ps1
+#. C:\util\Scripts\Function_Grava-Log.ps1
 
 # -----------------------------------------------------------------
-Grava-Log('Iniciando execucao')
+#Grava-Log('Iniciando execucao')
+
+# Importa arquivos de funcoes via 'dot source' para que as funcoes possam ser usadas aqui.
+. '\\SRVADM\c$\util\Scripts\Function_VA_Log.ps1'
+. '\\SRVADM\c$\util\Scripts\Function_VA_Aviso.ps1'
+
+VA_Log -TipoLog 'info' -MsgLog 'Iniciando execucao'
 
 # lista conteudo atual:  Get-aduser -filter * -Properties employeeid | Select-Object name, employeeid
 
@@ -21,31 +27,33 @@ $connection = new-object System.Data.SqlClient.SQLConnection("Data Source=Server
 $connection.credential = $cred
 $connection.Open();
 $query  = "delete USUARIOS_AD"
-Grava-Log($query)
+#Grava-Log($query)
+VA_Log -TipoLog 'info' -MsgLog $query
 $cmd = new-object System.Data.SqlClient.SqlCommand($query, $connection);
 $exec = $cmd.ExecuteNonQuery()
 
-    $Users = @(get-aduser -Filter * -Properties name, employeeID)
-    foreach ($User in $Users)
-    {
-        $query  = "insert into USUARIOS_AD ("
-        $query += "SamAccountName, Enabled, EmployeeID"
-        $query += ") values ("
-        $query += "'" + $User.SamAccountName + "'"
-        if ($User.Enabled)
-        {
-            $query += ",'S'"
-        }
-        else
-        {
-            $query += ",'N'"
-        }
-        $query += ",'" + $User.EmployeeID + "'"
-        $query += ")"
-        Grava-Log($query)
-        $cmd = new-object System.Data.SqlClient.SqlCommand($query, $connection);
-        $exec = $cmd.ExecuteNonQuery()
+	$Users = @(get-aduser -Filter * -Properties name, employeeID)
+	foreach ($User in $Users)
+	{
+		$query  = "insert into USUARIOS_AD ("
+		$query += "SamAccountName, Enabled, EmployeeID"
+		$query += ") values ("
+		$query += "'" + $User.SamAccountName + "'"
+		if ($User.Enabled)
+		{
+			$query += ",'S'"
+		}
+		else
+		{
+			$query += ",'N'"
+		}
+		$query += ",'" + $User.EmployeeID + "'"
+		$query += ")"
+	#        Grava-Log($query)
+		VA_Log -TipoLog 'info' -MsgLog $query
+		$cmd = new-object System.Data.SqlClient.SqlCommand($query, $connection);
+		$exec = $cmd.ExecuteNonQuery()
+	}
 
-    }
-
-Grava-Log('Finalizando execucao.')
+#Grava-Log('Finalizando execucao.')
+VA_Log -TipoLog 'info' -MsgLog 'Finalizando execucao.'
