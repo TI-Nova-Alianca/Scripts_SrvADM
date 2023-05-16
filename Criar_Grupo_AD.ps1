@@ -1,13 +1,13 @@
 ﻿
-$Desc1="Engenharia\Engenharia do Produto\SAFRA\Documentos Filial 07"
+$Desc1="Financeiro\Comprovantes_RH"
 #$Desc1="Governanca\Novos POPs\POP-JUR"
 #$Desc1="Governanca\Novos POPs\POP-SUP"
 #$Desc1="Governanca\Novos POPs\POP-CUS"
 
 
-$GrpName   =  "GrpF07DocsSafra" 
+$GrpName   =  "GrpFinCompRH" 
 $GrpDesc   =  $Desc1
-$GrpMembros = "fabiana.busetti";"f07.laboratorio";"balanca.f07"
+$GrpMembros = "andre.oliveira";"franciele.oliveira";"yulli.pereira"
 
 $GrPath    =  "OU=Grupos FileShare,DC=vinhos-alianca,DC=local"
 $GrpMembroDe =  "Grp"+$GrpDesc.Split('\')[0]+"_N1"
