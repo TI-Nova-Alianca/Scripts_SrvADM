@@ -19,6 +19,7 @@
 # 24/02/2023 - Robert - Filtrar objetos '%diagram%' (padrao do SQL)
 #                     - Passa a rodar em loop.
 # 05/04/2023 - Robert - Melhorado filtro objetos Protheus.
+# 18/07/2023 - Robert - Acrescentados databases BI_ALIANCA e TI
 #
 
 # ---------------------------------------------------------------------------
@@ -82,15 +83,16 @@ do
             "naweb_teste"           {$PastaBackup = ""}
             "protheus_testefiscal"  {$PastaBackup = ""}
             "protheus_teste"        {$PastaBackup = ""}
+            "BI_ALIANCA"            {$PastaBackup = $PastaBaseBackup + "\BI_ALIANCA"}
             "protheus"              {$PastaBackup = $PastaBaseBackup + "\Protheus"}
             "BL01"                  {$PastaBackup = $PastaBaseBackup + "\BL01"}
             "MercanetHML"           {$PastaBackup = $PastaBaseBackup + "\MercanetHML"}
             "naweb"                 {$PastaBackup = $PastaBaseBackup + "\NaWeb"}
-
-#            default
-#            {
-#                $PastaBackup = $PastaBaseBackup + "\" + $db.Name
-#            }
+            "TI"                    {$PastaBackup = $PastaBaseBackup + "\TI"}
+            default
+            {
+                $PastaBackup = ""
+            }
         }
         
         # Quem nao tiver pasta definida para backup nao vai ser exportado.
@@ -152,10 +154,11 @@ do
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'MSSOMA1%'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'MSSTRZERO%'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'SPGERASRZ%'"
-                $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'PCO001%'"
+                $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'PCO00%'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'SC%01'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'SC214140'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'TTAT_%'"  # Totvs comecou a gravar tambem funcions em 2023.
+                $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like 'XA4_TT%'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like '%XFILIAL%'"
                 $SQLQuery += " and upper (OBJECT_NAME(sm.object_id)) not like '%010_STAMP'"
             }
