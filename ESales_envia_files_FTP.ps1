@@ -14,6 +14,7 @@
 # 19/09/2022 - Robert - Migrado para pasta compartilhada no SrvAdm
 #                     - Passa a usar rotinas compartilhadas de log e aviso.
 # 08/03/2023 - Robert - Criado tratamento para exportar mais de uma filial (01 e 16) - GLPI 13289
+# 02/10/2023 - Robert - Nao grava mais uma copia do XML enviado.
 #
 
 # Acesso FTP e-Sales:
@@ -205,7 +206,7 @@ foreach($item in (dir $PastaArq "*.xml"))
             sleep (0.2) # Aguarda ate ser finalizada a transmissao.
 
             # Guarda uma copia do arquivo (usar apenas durante fase de testes)
-            Copy-Item $item.fullName 'c:\siga\protheus12\protheus_data\ESales\envio\copia_dos_XML_enviados\'
+            # Copy-Item $item.fullName 'c:\siga\protheus12\protheus_data\ESales\envio\copia_dos_XML_enviados\'
 
             Remove-Item $item.fullName
         } catch [Exception] {

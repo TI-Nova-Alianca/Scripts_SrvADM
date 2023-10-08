@@ -29,6 +29,7 @@
 #                      - Melhoria funcoes externas de geracao de logs e avisos.
 #                      - Revisao geral de quais pastas devem ser verificadas.
 # 10/11/2022 - Robert  - Limpeza arq.XML do importador TRS desabilitada (movia arquivos antes que fossem processados).
+# 10/09/2023 - Robert  - Remove copias de arquivos INI criadas durante as compilacoes
 #
 
 # Importa arquivos de funcoes via 'dot source' para que as funcoes possam ser usadas aqui.
@@ -123,7 +124,6 @@ Get-ChildItem $PastaBaseProtheus\pedidos\*.pdf | where -FilterScript {$_.LastWri
 Get-ChildItem $PastaBaseProtheus\DirDoc -Recurse -Include sc*.csv | remove-item -Force
 Get-ChildItem $PastaBaseProtheus\DirDoc -Recurse -Include sc*.xml | remove-item -Force
 Get-ChildItem $PastaBaseProtheus\DirDoc -Recurse -Include ap*.tmp | remove-item -Force
-# Esta pasta nao existe mais Get-ChildItem $PastaBaseProtheus\PswBackup | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-30)} | remove-item -recurse  -Force
 Get-ChildItem $PastaBaseProtheus\workflow\emp??\mail\*\sent\*\*.wfm | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-5)} | remove-item -Force
 Get-ChildItem $PastaBaseProtheus\workflow\emp??\temp\*.htm | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-5)} | remove-item -Force
 Get-ChildItem $PastaBaseProtheus\workflow\emp??\process\*.val | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-10)} | remove-item -Force
@@ -140,6 +140,10 @@ Get-ChildItem C:\siga\Protheus12\apo_6??? | where -FilterScript {$_.LastWriteTim
 Get-ChildItem C:\siga\Protheus12\apo_7??? | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-5)} | Remove-Item -Recurse -verbose
 Get-ChildItem C:\siga\Protheus12\apo_8??? | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-5)} | Remove-Item -Recurse -verbose
 Get-ChildItem C:\siga\Protheus12\apo_9??? | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-5)} | Remove-Item -Recurse -verbose
+
+
+# Remove copias de arquivos INI criadas durante as compilacoes
+Get-ChildItem C:\siga\Protheus12\BIN\appserver*.ini_2023* -Recurse | where -FilterScript {$_.LastWriteTime -le [System.DateTime]::Now.AddDays(-10)} | Remove-Item -Verbose
 
 
 # Gera backup diario dos scripts. Pretendo mover todos para o SrvAdm, mas, ateh que fique pronto...

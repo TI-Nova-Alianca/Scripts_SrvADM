@@ -5,11 +5,11 @@
 
 
 
-$Desc1 = "Engenharia\Laboratório\REGISTROS DE ANALISES"
-$GrpName =  "GrpRegAnalises"
+$Desc1 = "Engenharia\Engenharia do Produto\NOVOS POP'S"
+$GrpName =  "GrpEngNovosPops"
 
 $GrpDesc = $Desc1
-$GrpMembros = "daiana.ribas"
+$GrpMembros = ""
 
 $GrPath = "OU=Grupos FileShare,DC=vinhos-alianca,DC=local"
 $GrpMembroDe ="Grp"+$GrpDesc.Split('\')[0]+"_N1"
