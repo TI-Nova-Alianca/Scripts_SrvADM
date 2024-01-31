@@ -14,6 +14,7 @@
 # 14/11/2021 - Robert - Adicionado servico retaguarda_PDV
 # 19/09/2022 - Robert - Migrado para pasta compartilhada no SrvAdm
 #                     - Passa a usar rotinas compartilhadas de log e aviso.
+# 31/10/2023 - Robert - Acrescentado servico REST_MNTNG
 #
 
 # Importa arquivos de funcoes via 'dot source' para que as funcoes possam ser usadas aqui.
@@ -40,7 +41,7 @@ start-job {stop-Service 1*job_nf_cupom*}
 start-job {stop-Service TotvsSOA*}
 start-job {stop-Service 1*WS*}
 start-job {stop-Service 1*TAF*}
-start-job {stop-Service 1*retaguarda*}
+start-job {stop-Service 1*REST_MNTNG*}
 
 start-sleep 15
 
@@ -51,7 +52,7 @@ start-job {stop-Service 1*TSS*}
 $contador = 60
 do{
     Start-sleep 1
-    $IDs = (Get-WmiObject Win32_Process | ? {$_.Name -like '*appserver_slave1*' -or $_.Name -like '*appserver_slave2*' -or $_.Name -like '*appserver_slave3*' -or $_.Name -like '*appserver_slave4*' -or $_.Name -like '*appserver_slave6*' -or $_.Name -like '*appserver_loja*'  -or $_.Name -like '*appserver_externo*' -or $_.Name -like '*appserver_master*' -or $_.Name -like '*appserver_job_nf_cupom*' -or $_.Name -like '1*WS*' -or $_.Name -like '*importador_XML*' -or $_.Name -like '1*TAF*' -or $_.Name -like '1*retaguarda*'}).Handle
+    $IDs = (Get-WmiObject Win32_Process | ? {$_.Name -like '*appserver_slave1*' -or $_.Name -like '*appserver_slave2*' -or $_.Name -like '*appserver_slave3*' -or $_.Name -like '*appserver_slave4*' -or $_.Name -like '*appserver_slave6*' -or $_.Name -like '*appserver_loja*'  -or $_.Name -like '*appserver_externo*' -or $_.Name -like '*appserver_master*' -or $_.Name -like '*appserver_job_nf_cupom*' -or $_.Name -like '1*WS*' -or $_.Name -like '*importador_XML*' -or $_.Name -like '1*TAF*' -or $_.Name -like '1*REST_MNTNG*'}).Handle
     VA_Log -TipoLog 'info' -MsgLog ('Processo(s) ainda em execucao:' + $IDs)
     VA_Log -TipoLog 'info' -MsgLog ('Servico(s) ainda pendente(s) sera(ao) finalizados (kill) em ' + $contador + ' segundos')
     if ($IDs.Length -eq 0)
@@ -87,7 +88,7 @@ start-service 1*job_nf_cupom*
 start-service TotvsSOA*
 start-service 1*WS*
 start-service 1*TAF*
-start-service 1*retaguarda*
+start-service 1*REST_MNTNG*
 start-service 1*importador_XML*
 
 # Servico enjoado, parece que nao sobe na primeira chamada...
